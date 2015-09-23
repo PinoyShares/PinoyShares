@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="http://youmakeonline.com/">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=307234496140357";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js' type='text/javascript'></script>
+
+<center>votes for Yaya Dub : <span id="fb-share-count-website-1">0</span> <br/>
+votes for Pastillas Girl : <span id="fb-share-count-website-2">0</span></center>
+
+
+<script>
+// AJAX request for website URL 1
+$.ajax({
+type: 'GET',
+url: 'https://graph.facebook.com/http://www.google.co.uk',
+success: function(data) {
+showCount(data, 'fb-share-count-website-1');
+}
+});
+
+// AJAX request for website URL 2
+$.ajax({
+type: 'GET',
+url: 'https://graph.facebook.com/http://www.google.de',
+success: function(data) {
+showCount(data, 'fb-share-count-website-2');
+}
+});
+
+function showCount(responseText, spanID) {
+    
+// Save the parsed JSON
+var json = responseText;
+
+// Check if the response contains a 'shares' property
+// If it doesn't, we can just exit this function
+if( !responseText.hasOwnProperty('shares') )
+return;
+
+// A shares property and value must exist, update
+// the span element with the share count
+var count = json.shares;
+$('#' + spanID).html(count);
+}
+</script>
+
+
+<div class="fb-comments" data-href="http://youmakeonline.com/" data-numposts="5"></div>
+
+</body>
+<html>
